@@ -15,13 +15,23 @@ class Customer:
 
     def full_name(self):
         return f"{self._given_name} {self._family_name}"
+    
+    def resturants(self):
+        return list(set(review.restaurant() for review in self._reviews))
+    
+    def add_reviews(self,restaurant, rating):
+        new_review = Review(self, restaurant, rating)
+        self._reviews.append(new_review)
 
     @classmethod
     def all(cls):
         return cls.customers
     
 customer1 = Customer("Storm", "Robert")
+customer2 = Customer("Romero", "Doe" )
+customer3 = Customer("ciara", "Rune")
 print(customer1.full_name())
+# print(Customer.customers)
     
 class Restaurant:
     restaurants = []
@@ -32,20 +42,26 @@ class Restaurant:
 
     def name(self):
         return self._name
+    
+    def reviews(self):
+        return self._reviews
+
+    def customers(self):
+        return list(set(review.customer() for review in self._reviews))
 
     @classmethod
     def all(cls):
         return cls.restaurants
   
 class Review:
- reviews = []
+ all_reviews = []
  def __init__(self, customer, restaurant, rating):
      self._customer = customer
      self._restaurant = restaurant
      self._rating = rating
-     Review.reviews.append(self)
-     restaurant.reviews.append(self)
-     customer.reviews.append(self)
+     Review.all_reviews.append(self)
+     restaurant.reviews().append(self)
+     customer.add_reviews(restaurant, rating)
 
 def customer(self):
     return self.customer
@@ -57,5 +73,6 @@ def rating(self):
 @classmethod
 def all(cls):
     return cls.reviews
+
 
 
