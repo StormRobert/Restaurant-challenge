@@ -76,14 +76,27 @@ class Restaurant:
         return cls.restaurants
   
 class Review:
- all_reviews = []
+    all_reviews = []
 
- def __init__(self, customer, restaurant, rating):
-     self._customer = customer
-     self._restaurant = restaurant
-     self._rating = rating
+    def __init__(self, customer, restaurant, rating):
+        self._customer = customer
+        self._restaurant = restaurant
+        self._rating = rating
 
-     Review.all_reviews.append(self)
+        Review.all_reviews.append(self)
+
+    def customer(self):
+        return self._customer
+
+    def restaurant(self):
+        return self._restaurant
+
+    def rating(self):
+        return self._rating
+
+    @classmethod
+    def all(cls):
+        return cls.all_reviews
      
 
 def customer(self):
@@ -102,18 +115,22 @@ def all(cls):
 def main():
     customer1 = Customer("Storm", "Robert")
     customer2 = Customer("Khalif", "Kairo")
+    customer3 = Customer("Bruce", "Wayne")
 
     restaurant1 = Restaurant("KFC")
     restaurant2 = Restaurant("CJ's")
+    restaurant3 = Restaurant("Pizza Hut")
 
     review1 = Review(customer1, restaurant1, 3)
-    review2 = Review(customer2, restaurant2, 3)
+    review2 = Review(customer2, restaurant2, 4)
+    review3 = Review(customer3, restaurant3, 5)
 
     
     print(customer1.full_name())  
     print(customer2.full_name())
-    print(restaurant2.average_star_rating())  
-    print(customer1.num_reviews()) 
+
+    for review in Review.all():
+     print(f"Review - Customer: {review.customer().full_name()}, Restaurant: {review.restaurant().name()}, Rating: {review.rating()}")
 
 if __name__ == '__main__':
     main()
