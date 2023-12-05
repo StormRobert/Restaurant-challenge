@@ -123,7 +123,7 @@ def main():
 
     review1 = Review(customer1, restaurant1, 3)
     review2 = Review(customer2, restaurant2, 4)
-    review3 = Review(customer3, restaurant3, 5)
+    review3 = Review(customer3, restaurant3, 2)
 
     
     print(customer1.full_name())  
